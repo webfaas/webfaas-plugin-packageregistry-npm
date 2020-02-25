@@ -1,38 +1,36 @@
-# WebFaas Core
+# WebFaas - Plugin - PackageRegistry - NPM
 
-Minimalist FaaS framework for [node](http://nodejs.org).
+WebFaaS Plugin for [node](http://nodejs.org).
 
 [![NPM Version][npm-image]][npm-url]
 [![Linux Build][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-## FaaS Micro Framework
-
-## Features
-  * Focus on high performance
-  * Input/Output with automatic validation
-
 ### Example
 ```javascript
 "use strict";
 
-import { Core } from "../lib/Core";
-import { PackageRegistryMock } from "../test/mocks/PackageRegistryMock";
+import { ModuleManager } from "@webfaas/webfaas-core";
 
-const core = new Core();
+import { PackageRegistry } from "../lib/PackageRegistry";
 
-core.getModuleManager().getPackageStoreManager().getPackageRegistryManager().addRegistry("REGISTRY1", "REGISTRY3", new PackageRegistryMock.PackageRegistry1());
+var moduleManager = new ModuleManager();
+moduleManager.getPackageStoreManager().getPackageRegistryManager().addRegistry("npm", "", new PackageRegistry());
 
 (async function(){
-    await core.start();
+    try {
+        var moduleObj: any = await moduleManager.import("uuid/v1", "3.4.0", undefined, "npm");
         
-    var response: any = await core.invokeAsync("@registry1/mathsum", "0.0.1", "", [2,3]);
-
-    if (response){
-        console.log("response", response);
+        if (moduleObj){
+            console.log("module loaded", moduleObj);
+            console.log("uuid => ", moduleObj());
+        }
+        else{
+            console.log("module not loaded");
+        }
     }
-    else{
-        console.log("not response");
+    catch (errTry) {
+        console.log("errExample: ", errTry);
     }
 })();
 ```
@@ -41,11 +39,11 @@ core.getModuleManager().getPackageStoreManager().getPackageRegistryManager().add
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/@webfaas/webfaas-core.svg
-[npm-url]: https://npmjs.org/package/@webfaas/webfaas-core
+[npm-image]: https://img.shields.io/npm/v/@webfaas/webfaas-plugin-packageregistry-npm.svg
+[npm-url]: https://npmjs.org/package/@webfaas/webfaas-plugin-packageregistry-npm
 
-[travis-image]: https://img.shields.io/travis/webfaas/core/master.svg?label=linux
-[travis-url]: https://travis-ci.org/webfaas/core
+[travis-image]: https://img.shields.io/travis/webfaas/webfaas-plugin-packageregistry-npm/master.svg?label=linux
+[travis-url]: https://travis-ci.org/webfaas/webfaas-plugin-packageregistry-npm
 
-[coveralls-image]: https://img.shields.io/coveralls/github/webfaas/core/master.svg
-[coveralls-url]: https://coveralls.io/github/webfaas/core?branch=master
+[coveralls-image]: https://img.shields.io/coveralls/github/webfaas/webfaas-plugin-packageregistry-npm/master.svg
+[coveralls-url]: https://coveralls.io/github/webfaas/webfaas-plugin-packageregistry-npm?branch=master
