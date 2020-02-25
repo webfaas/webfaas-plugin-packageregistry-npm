@@ -29,6 +29,15 @@ export class PackageRegistry implements IPackageRegistry {
         return headers;
     }
 
+    parseETag(value: any): string{
+        if (value){
+            return value.toString();
+        }
+        else{
+            return "";
+        }
+    }
+
     /**
      * return type name
      */
@@ -65,12 +74,7 @@ export class PackageRegistry implements IPackageRegistry {
                 var respHTTP: IClientHTTPResponse = await this.clientHTTP.request(url, "GET", undefined, headers);
 
                 if (respHTTP.statusCode === 200){
-                    var temp_header_etag = respHTTP.headers["etag"];
-                    var header_etag: string = "";
-
-                    if (temp_header_etag){
-                        header_etag = temp_header_etag.toString();
-                    }
+                    var header_etag: string = this.parseETag(respHTTP.headers["etag"])
 
                     manifestResponseObj.packageStore = PackageStoreUtil.buildPackageStoreFromListBuffer(name, "", header_etag, [respHTTP.data], ["package.json"]);
 
@@ -123,12 +127,7 @@ export class PackageRegistry implements IPackageRegistry {
                 var respHTTP: IClientHTTPResponse = await this.clientHTTP.request(url, "GET", undefined, headers);
                 
                 if (respHTTP.statusCode === 200){
-                    var temp_header_etag = respHTTP.headers["etag"];
-                    var header_etag: string = "";
-                    
-                    if (temp_header_etag){
-                        header_etag = temp_header_etag.toString();
-                    }
+                    var header_etag: string = this.parseETag(respHTTP.headers["etag"])
                     
                     packageResponseObj.packageStore = PackageStoreUtil.buildPackageStoreFromTarGzBuffer(name, version, header_etag, respHTTP.data);
 

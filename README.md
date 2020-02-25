@@ -6,6 +6,41 @@ WebFaaS Plugin for [node](http://nodejs.org).
 [![Linux Build][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
+### Config - Simple
+```json
+{
+    "registry.npm": [
+        {
+            "name": "[registry name]",
+            "url": "[url npm]"
+        }
+    ]
+}
+```
+
+### Config - Complete
+```json
+{
+    "registry.npm": [
+        {
+            "name": "[registry name]",
+            "url": "[url npm]",
+            "token": "[token npm]",
+            "slaveName": "[registry slave name]",
+            "http: {
+                "keepAlive": "true",
+                "rejectUnauthorized": "true",
+                "timeout":  100000,
+                "maxSockets": 2,
+                "key": "./crt/key.pem",
+                "cert": "./crt/public.pem",
+                "ca": "./crt/ca.pem"
+            }
+        }
+    ]
+}
+```
+
 ### Example
 ```javascript
 "use strict";

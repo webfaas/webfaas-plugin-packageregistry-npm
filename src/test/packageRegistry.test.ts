@@ -21,6 +21,11 @@ describe("Package Registry", () => {
         chai.expect(packageRegistry_default.getTypeName()).to.eq("npm");
         chai.expect(packageRegistry_full.getTypeName()).to.eq("npm");
         chai.expect(typeof(packageRegistry_full.getConfig())).to.eq("object");
+
+        chai.expect(packageRegistry_full.parseETag("11")).to.eq("11");
+        chai.expect(packageRegistry_full.parseETag("")).to.eq("");
+        chai.expect(packageRegistry_full.parseETag(null)).to.eq("");
+        chai.expect(packageRegistry_full.parseETag(undefined)).to.eq("");
     })
 
     it("buildHeaders - default", function(){

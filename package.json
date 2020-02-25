@@ -1,7 +1,7 @@
 {
   "name": "@webfaas/webfaas-plugin-packageregistry-npm",
   "version": "0.1.0-alpha1",
-  "description": "WEBFaaS Framework - Plugin - Package Registry - NPM",
+  "description": "WebFaaS Framework - Plugin - Package Registry - NPM",
   "main": "lib/index.js",
   "readmeFilename": "README.md",
   "keywords": [
@@ -14,7 +14,7 @@
     "start": "node_modules/.bin/tsc -w && npm run build:static",
     "build": "npm run build:clean && node_modules/.bin/tsc && npm run build:static",
     "build:clean": "rm -rf dist",
-    "build:static": "cp package.json dist && cp README.md dist && cp .npmignore dist",
+    "build:static": "cp package.json dist && cp README.md dist && cp .npmignore dist && cp src/test/data -R dist/test",
     "setnpmtoken": "rm ~/.npmrc && echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > ~/.npmrc",
     "publish_npm": "cd dist && npm publish --access public",
     "pack": "npm pack dist",
@@ -35,9 +35,9 @@
     "chai": "^4.2",
     "mocha": "^6.2",
     "nyc": "^15.0",
-    "sonarqube-scanner": "^2.5.0",
     "typescript-tslint-plugin": "^0.5",
-    "@webfaas/webfaas-core": "^0"
+    "sonarqube-scanner": "^2.5.0",
+    "@webfaas/webfaas-core": "^0.2"
   },
   "engines": {
     "node": ">=10.0.0"
