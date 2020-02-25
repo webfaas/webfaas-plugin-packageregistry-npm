@@ -27,7 +27,7 @@ WebFaaS Plugin for [node](http://nodejs.org).
             "url": "[url npm]",
             "token": "[token npm]",
             "slaveName": "[registry slave name]",
-            "http: {
+            "http": {
                 "keepAlive": "true",
                 "rejectUnauthorized": "true",
                 "timeout":  100000,
