@@ -29,6 +29,10 @@ export class PackageRegistry implements IPackageRegistry {
         return headers;
     }
 
+    /**
+     * return eTag
+     * @param value 
+     */
     parseETag(value: any): string{
         if (value){
             return value.toString();

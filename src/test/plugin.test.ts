@@ -20,7 +20,6 @@ describe("Plugin", () => {
 
         //config
         (<NodeModule> require.main).filename = path.join(__dirname, "./data/-data-config");
-        //const fileConfig = path.join(path.dirname((<NodeModule> require.main).filename), "data-config");
         let core2 = new Core();
         let plugin2 = new WebFassPlugin(core2);
         core2.getLog().changeCurrentLevel(LogLevelEnum.OFF);
