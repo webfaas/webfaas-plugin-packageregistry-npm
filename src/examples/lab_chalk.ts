@@ -5,11 +5,11 @@ import { ModuleManager } from "@webfaas/webfaas-core";
 import { PackageRegistry } from "../lib/PackageRegistry";
 
 var moduleManager = new ModuleManager();
-moduleManager.getPackageStoreManager().getPackageRegistryManager().addRegistry("npm", "", new PackageRegistry());
+moduleManager.getModuleManagerImport().getPackageStoreManager().getPackageRegistryManager().addRegistry("npm", "", new PackageRegistry());
 
 (async function(){
     try {
-        var moduleObj: any = await moduleManager.import("chalk", "3", undefined, "npm");
+        var moduleObj: any = await moduleManager.getModuleManagerImport().import("chalk", "3", undefined, "npm");
 
         if (moduleObj){
             console.log("module loaded", moduleObj);
