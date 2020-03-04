@@ -2,8 +2,6 @@ import * as chai from "chai";
 import * as mocha from "mocha";
 
 import { ClientHTTPConfig } from "@webfaas/webfaas-core";
-
-import { PackageRegistry } from "../lib/PackageRegistry";
 import { PackageRegistryConfig } from "../lib/PackageRegistryConfig";
 
 describe("Package Registry Config", () => {
