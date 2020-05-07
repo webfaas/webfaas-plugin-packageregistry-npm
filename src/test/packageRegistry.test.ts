@@ -76,13 +76,9 @@ describe("Package Registry - getPackage", () => {
     })
 
     it("getPackage - @@@@", async function(){
-        try {
-            let packageRegistryResponse = await packageRegistry_default.getPackage("@@@@", "@@@@");
-            throw new Error("Sucess!");
-        }
-        catch (error) {
-            chai.expect(error).to.eq(405);
-        }
+        let packageRegistryResponse = await packageRegistry_default.getPackage("@@@@", "@@@@");
+        chai.expect(packageRegistryResponse.etag).to.eq("");
+        chai.expect(packageRegistryResponse.packageStore).to.be.null;
     })
 
     it("getPackage - mock error", async function(){
